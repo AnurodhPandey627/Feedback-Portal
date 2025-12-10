@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('includes/head') %>
+  <meta charset="UTF-8">
+  <title>Get Started</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 3rem;
+      font-size: 3rem;
+      color: #2c3e50;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .card-container {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      width: 320px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.5s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .card-content h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .card-content a {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #ff6f61;
+      color: white;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .card-content a:hover {
+      background-color: #ff3e2d;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include("./includes/flash.ejs") %>
+  <h1><%= t('getStarted.title') %></h1>
+  <div class="card-container">
+
+    <!-- Student Registration Card -->
+    <div class="card">
+      <img src="https://media.istockphoto.com/id/1148232211/photo/schoolgirl-throwing-paper-airplane-in-classroom.jpg?s=2048x2048&w=is&k=20&c=VS95VTCJzKUBX4rYCpsCpc-csu2LmTgLh2aXK2NwQwA=" alt="Student">
+      <div class="card-content">
+        <h3><%= t('getStarted.newStudent') %></h3>
+        <a href="/newstudent"><%= t('getStarted.registerBtn') %></a>
+      </div>
+    </div>
+
+    <!-- Teacher Registration Card -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Teacher">
+      <div class="card-content">
+        <h3><%= t('getStarted.newTeacher') %></h3>
+        <a href="/newteacher"><%= t('getStarted.registerBtn') %></a>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</html>

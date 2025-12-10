@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('includes/head') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title><%=t('teacherDashboard.title')%></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 60px;
+            height:100vh;
+            background-color:#f8f9fa;
+        }
+        .navbar {
+            width: 100%;
+            background: #5B85AA;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 6rem;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .nav-anchor {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-anchor:hover {
+            color: #00bcd4;
+            text-shadow: 0 0 8px #00bcd4;
+            transform: scale(1.05);
+        }
+
+        #navbarNav{
+            margin-left:5rem;
+        }
+        .navbar-brand{
+            cursor:default;
+        }
+        li{
+            margin:0.5rem;
+        }
+        .navbar h2 {
+            margin: 0;
+            flex-grow: 1;
+        }
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .nav ul li:hover {
+            background: #1A252F;
+            border-radius: 5px;
+        }
+        .main-content {
+            margin-top:1.5rem;
+            padding: 20px;
+        }
+        .tag-line{
+            display:flex;
+            flex-direction: column;
+            text-align:center;
+            margin:1rem; 
+            font-family: "Playfair Display", serif;
+            color:#7FB800;
+        }
+        .dashboard-cards {
+            display: flex;
+            gap: 20px;
+        }
+        .card {
+            background: #ECF0F1;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            text-align: center;
+        }
+        .class-schedule, .feedback-section {
+            margin-top: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <nav class="navbar navbar-expand-lg lg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="color: #fff;padding-right: 1rem;"><h1><%=t('teacherDashboard.welcome')%> <%=teacher.tname%></h1></a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul>
+                        <li><a href="http://localhost:8080/" class="nav-anchor"><%=t('teacherDashboard.nav.home')%></a></li>
+                        <li><a href="#" class="nav-anchor"><%=t('teacherDashboard.nav.attendance')%></a></li>
+                        <li><a href="http://localhost:8080/teacher-schedule?TID=<%=teacher.TID%>" class="nav-anchor"><%=t('teacherDashboard.nav.feedback')%></a></li>
+                        <li><a href="#" class="nav-anchor"><%=t('teacherDashboard.nav.performance')%></a></li>
+                    </ul>
+                    <ul class="ms-auto"><li><a href="/logout" class="nav-anchor"><%=t('teacherDashboard.nav.logout')%></a></li></ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <%- include("./includes/flash.ejs") %>
+
+    <div class="main-content">
+        <div class="tag-line">
+            <h1><%=t('teacherDashboard.tagline.line1')%></h1>
+            <h1><%=t('teacherDashboard.tagline.line2')%></h1>
+        </div>
+        <div class="dashboard-cards">
+            <div class="card">
+                <h3><%=t('teacherDashboard.cards.classesTaken')%></h3>
+                <p>10 <%=t('teacherDashboard.cards.thisWeek')%></p>
+            </div>
+            <div class="card">
+                <h3><%=t('teacherDashboard.cards.attendanceRate')%></h3>
+                <p>92%</p>
+            </div>
+            <div class="card">
+                <h3><%=t('teacherDashboard.cards.feedbackScore')%></h3>
+                <p>4.5/5</p>
+            </div>
+        </div>
+        <div class="class-schedule">
+            <h3><%=t('teacherDashboard.schedule.title')%></h3>
+            <ul>
+                <li>Mathematics - 10:00 AM</li>
+                <li>Science - 12:00 PM</li>
+            </ul>
+        </div>
+        <div class="feedback-section">
+            <h3><%=t('teacherDashboard.feedback.title')%></h3>
+            <p><%=t('teacherDashboard.feedback.sample')%></p>
+            <button type="button" class="btn btn-info"><%=t('teacherDashboard.feedback.viewAll')%></button>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('includes/head') %>
+  <meta charset="UTF-8">
+  <title><%= t('teacherRegistration.title') %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Special+Gothic&display=swap" rel="stylesheet">
+  <style>
+    *{
+        font-family: "Plus Jakarta Sans", sans-serif;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f2f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 40%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    select,option {
+        font-weight: 600;
+    }
+
+
+    button {
+      width: 100%;
+      margin-top: 2rem;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <%- include("./includes/flash.ejs") %>
+  <div class="container">
+    <h2><%= t('teacherRegistration.title') %></h2>
+    <form action="/newteacher" class="needs-validation" novalidate method="POST">
+      <div class="form-group">
+        <label for="school" class="form-label"><%= t('teacherRegistration.labels.school') %></label>
+        <select id="school" class="form-select" name="school" required>
+            <option selected disabled value=""><%= t('teacherRegistration.selectOption') %></option>
+            <option value="St.Paul's School">St.Paul's School</option>
+            <option value="Paradise Childrens' Academy">Paradise Childrens' Academy</option>
+            <option value="D.A.V. School">D.A.V. School</option>
+            <option value="Gems English School">Gems English School</option>
+        </select>
+        <div class="invalid-feedback">
+          Please Select a valid School
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tname" class="form-label"><%= t('teacherRegistration.labels.name') %></label>
+        <input type="text" id="tname" name="tname" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide a valid name
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tphone" class="form-label"><%= t('teacherRegistration.labels.phone') %></label>
+        <input type="tel" id="tphone" name="tphone" class="form-control" required pattern="[0-9]{10}">
+        <div class="invalid-feedback">
+          Please provide a valid phone number
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="aadhar_no" class="form-label"><%= t('teacherRegistration.labels.aadhar') %></label>
+        <input type="text" id="aadhar_no" name="aadhar_no" class="form-control" maxlength="12" pattern="\d{12}" required>
+        <div class="invalid-feedback">
+          Please provide a valid aadhar number
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="highest_qualifications" class="form-label"><%= t('teacherRegistration.labels.qualification') %></label>
+        <select id="highest_qualifications" name="highest_qualifications" class="form-select" required>
+            <option value="" selected disabled><%= t('teacherRegistration.selectOption') %></option>
+            <option value="Post Graduate">Post Graduate</option>
+            <option value="Graduate">Graduate</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid Qualification
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="village" class="form-label"><%= t('teacherRegistration.labels.village') %></label>
+        <input type="text" id="village" name="village" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide a valid Village
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="district" class="form-label"><%= t('teacherRegistration.labels.district') %></label>
+        <input type="text" id="district" name="district"  class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide a valid District
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="state" class="form-label"><%= t('teacherRegistration.labels.state') %></label>
+        <input type="text" id="state" name="state" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide a valid State
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="country" class="form-label"><%= t('teacherRegistration.labels.country') %></label>
+        <input type="text" id="country" name="country" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide a valid Country
+        </div>
+      </div>
+
+      <button type="submit"><%= t('teacherRegistration.button') %></button>
+    </form>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/js/script.js"></script>
+</html>

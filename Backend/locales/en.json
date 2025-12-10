@@ -1,0 +1,214 @@
+{
+  "site_title": "My Feedback Portal",
+  "nav": {
+    "home": "Home",
+    "schedule": "Schedule",
+    "feedback": "Feedback",
+    "logout": "Logout",
+    "features": "Features",
+    "aboutUs": "About Us",
+    "FAQs": "FAQs",
+    "Login for all Modules": "Login for all Modules"
+  },
+  "home": {
+    "tagline": {
+      "line1": "Empowering Education",
+      "line2": "through",
+      "line3": "Real-Time Feedback"
+    },
+    "getStarted": "Get Started",
+    "about": {
+      "heading": "About the Platform",
+      "description": "This platform collects daily feedback from teachers and students to improve teaching quality and learning outcomes in government schools."
+    },
+    "teachers": {
+      "heading": "For Teachers",
+      "description": "Log in to provide daily feedback on class timings, topics covered, and interact with student feedback reports.",
+      "login": "Teacher Login"
+    },
+    "students": {
+      "heading": "For Students",
+      "description": "Submit your daily feedback, answer quizzes, and help us evaluate teaching quality.",
+      "login": "Student Login"
+    },
+    "admins": {
+      "heading": "For Administrators",
+      "description": "Monitor feedback data, generate performance reports, and manage school feedback systems.",
+      "login": "Admin Login"
+    },
+    "features": {
+      "heading": "Platform Features",
+      "list": {
+        "f1": "Daily Feedback Collection",
+        "f2": "Performance Evaluation for Teachers",
+        "f3": "Interactive Quizzes for Students",
+        "f4": "Comprehensive Data Reports",
+        "f5": "Language Localization Support"
+      }
+    },
+    "contact": {
+      "heading": "Contact Us",
+      "description": "If you have any questions or need support, please email us at"
+    }
+  },
+  "getStarted": {
+    "title": "Get Started",
+    "newStudent": "New Student",
+    "newTeacher": "New Teacher",
+    "registerBtn": "Register"
+  },
+  "studentDashboard": {
+    "title": "Student Dashboard",
+    "welcome": "Welcome",
+    "logout": "Logout",
+    "home": "Home",
+    "submitFeedback": "Submit Feedback",
+    "schedule": "Schedule",
+    "announcements": "Announcements",
+    "todayClasses": "Today's Classes",
+    "todayClassesAnnouncement": "Science: Matter in Our Surrounding :Characteristics of Particles of Matter- 9:00 AM",
+    "feedbackBtn": "Feedback",
+    "performance": "Performance",
+    "subject": "Subject",
+    "score": "Score",
+    "math": "Math",
+    "science": "Science",
+    "examAnnouncement": "Exam on Monday",
+    "libraryAnnouncement": "New Library Books Available"
+  },
+  "studentLogin": {
+    "title": "Student Login",
+    "loginBtn": "Login",
+    "sendOtpBtn": "Send OTP",
+    "verifyOtpBtn": "Verify OTP",
+    "labels": {
+      "school" : "School",
+      "class": "Class",
+      "roll": "Roll Number",
+      "phone": "+91XXXXXXXXXX",
+      "otp": "OTP"
+    },
+    "errors": {
+      "selectSchool": "Please select a valid school",
+      "invalidClass": "Please provide a valid class",
+      "invalidRoll": "Please provide a valid roll number",
+      "invalidPhone": "Please provide a valid phone number"
+    },
+    "messages": {
+      "processingError": "Error processing login. Please try again later.",
+      "invalidLogin": "Invalid login credentials. Please try again.",
+      "otpSendFailed": "Failed to send OTP. Please try again.",
+      "otpRequestError": "Error requesting OTP. Please try again later.",
+      "otpVerifyFailed": "OTP verification failed. Please try again.",
+      "networkError": "Network error. Please try again later."
+    }
+  },
+  "studentRegister": {
+    "title": "Student Registration",
+    "labels": {
+      "school": "School",
+      "class": "Class",
+      "roll": "Roll Number",
+      "section": "Section",
+      "name": "Full Name",
+      "aadhar": "Aadhar Number",
+      "dob": "Date of Birth",
+      "parentPhone": "Parent Phone Number",
+      "studentPhone": "Student Phone Number",
+      "optional": "Optional",
+      "village": "Village",
+      "district": "District",
+      "state": "State",
+      "country": "Country"
+    },
+    "submitBtn": "Register"
+  },
+  "teacherDashboard": {
+    "title": "Teacher's Dashboard",
+    "welcome": "Welcome!",
+    "nav": {
+      "home": "Home",
+      "attendance": "Attendance",
+      "feedback": "Submit Feedback",
+      "performance": "Performance Reports",
+      "logout": "Logout"
+    },
+    "tagline": {
+      "line1": "You build",
+      "line2": "Nation's Future"
+    },
+    "cards": {
+      "classesTaken": "Classes Taken",
+      "thisWeek": "This Week",
+      "attendanceRate": "Attendance Rate",
+      "feedbackScore": "Feedback Score"
+    },
+    "schedule": {
+      "title": "Upcoming Classes"
+    },
+    "feedback": {
+      "title": "Recent Feedback",
+      "sample": "Great lesson today! The concepts were clear.",
+      "viewAll": "View All"
+    }
+  },
+  "teacherLogin": {
+    "title": "Teacher Login",
+    "labels": {
+      "aadhar": "Aadhar Number",
+      "phone": "Phone Number"
+    },
+    "loginBtn": "Login"
+  },
+  "teacherRegistration": {
+    "title": "Teacher Registration",
+    "labels": {
+      "school": "School",
+      "name": "Teacher Name",
+      "phone": "Phone Number",
+      "aadhar": "Aadhar Number",
+      "qualification": "Highest Qualification",
+      "village": "Village",
+      "district": "District",
+      "state": "State",
+      "country": "Country"
+    },
+    "selectOption": "Select",
+    "button": "Register"
+  },
+  "teacherFeedback": {
+    "title": "Teacher Feedback Form",
+    "classStartTime": "Class Start Time",
+    "classEndTime": "Class End Time",
+    "presentStudents": "Number of Present Students",
+    "topicsTaught": "Topics Taught",
+    "enterTopic": "Enter topic",
+    "additionalFeedback": "Additional Feedback for the class (if any)",
+    "overallExperience": "Overall Class Experience (1 for least and 5 for most)",
+    "submitBtn": "Submit Feedback"
+  },
+  "studentFeedback": {
+    "title": "Student Feedback Form",
+    "subject": "Subject",
+    "classStartTime": "Class Start Time",
+    "classEndTime": "Class End Time",
+    "topicsTaught": "Topics Taught",
+    "understanding": "How well did you understand the topic?",
+    "interaction": "Did you ask doubts?",
+    "practicalExample": "Did the teacher give real life examples based on the topic?",
+    "prevHomework": "Was the previous homework checked?",
+    "currHomework": "Was new homework given and explained clearly?",
+    "additionalFeedback": "Additional Feedback",
+    "submitBtn": "Submit Feedback"
+  },
+  "questions": {
+    "title": "Student Questionnaire",
+    "submitBtn": "Submit Answers",
+    "resultSummary": "Result Summary",
+    "totalCorrect": "Total Correct",
+    "incorrect": "Incorrect",
+    "correctAnswer": "Correct Answer",
+    "yourAnswer": "Your Answer",
+    "confirmSend": "Confirm & Send to Server"
+  }
+}

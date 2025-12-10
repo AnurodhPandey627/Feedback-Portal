@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('includes/head') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title><%=t('studentFeedback.title')%></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            font-family: "PT Serif", serif;
+            font-weight: 500;
+            font-style: normal;
+            color:#001F54;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .topic-selection{
+            margin-bottom:1rem ;
+        }
+        .form-check label{
+            font-family: Arial, sans-serif;
+            font-weight:500;
+            
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #054367;
+        }
+
+        .qsn p{
+            font-weight:bold;
+            margin-bottom:0.5rem;
+        }
+        .qsn label{
+            font-weight: 400;
+        }
+        .qsn input{
+            border:0.5px solid black;
+        }
+
+        /* Additional Styling for Add and Remove buttons */
+        .topics-section {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+        }
+        .topic-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .topic-input input {
+            flex: 1;
+        }
+        .add-topic {
+            background: none;
+            border: none;
+            color: #28a745;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            width:20px;
+        }
+        .remove-topic {
+            background: none;
+            border: none;
+            color: #dc3545;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            width:20px;
+        }
+    </style>
+</head>
+<body>
+  <%- include("./includes/flash.ejs") %>
+    <div class="container">
+        <h1><%=t('studentFeedback.title')%></h1>
+
+        <form method="POST" action="/student/feedback" class="needs-validation" novalidate>  
+
+            <input type="hidden" name="SID" value="<%= studentId %>">
+            <input type="hidden" name="SUBID" value="<%= subjectId %>">
+            
+            <div class="mb-3">
+              <label for="subject" class="form-label"><%=t('studentFeedback.subject')%></label>
+              <select id="subject" name="subject" class="form-select" required>
+                  <option value="<%=subname%>" selected><%=subname%></option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a subject.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="start-time" class="form-label"><%=t('studentFeedback.classStartTime')%></label>
+              <input type="time" id="start-time" name="class_start_time" class="form-control" required>
+              <div class="invalid-feedback">
+                Please provide the class start time.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="end-time" class="form-label"><%=t('studentFeedback.classEndTime')%></label>
+              <input type="time" id="end-time" name="class_end_time" class="form-control" required>
+              <div class="invalid-feedback">
+                Please provide the class end time.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="topicsTaught" class="form-label"><%=t('studentFeedback.topicsTaught')%></label>
+              <div id="topicsContainer" class="topics-section">
+                  <% topics.forEach((topic, index) => { %>
+                      <div class="topic-input">
+                          <input type="text" name="topics[]" value="<%= topic %>" class="form-control mb-2" required readonly>
+                          <button type="button" class="remove-topic" onclick="removeTopic(this)">&minus;</button>
+                      </div>
+                  <% }); %>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="understanding" class="form-label"><%=t('studentFeedback.understanding')%></label>
+              <select id="understanding" name="understanding" class="form-select" required>
+                  <option value="">Choose...</option>
+                  <option value="excellent">Excellent</option>
+                  <option value="good">Good</option>
+                  <option value="average">Average</option>
+                  <option value="poor">Poor</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select your understanding level.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="interaction" class="form-label"><%=t('studentFeedback.interaction')%></label>
+              <select id="interaction" name="interaction" class="form-select" required>
+                  <option value="">Choose...</option>
+                  <option value="Yes,Solved">Yes and the teacher solved it</option>
+                  <option value="Yes,Unsolved">Yes but the teacher did not solve it</option>
+                  <option value="No">No</option>
+              </select>
+              <div class="invalid-feedback">
+                Please indicate if you asked doubts.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="practical-example" class="form-label"><%=t('studentFeedback.practicalExample')%></label>
+              <select id="practical-example" name="practical_example" class="form-select" required>
+                  <option value="">Choose...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select an option.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="prev-hw" class="form-label"><%=t('studentFeedback.prevHomework')%></label>
+              <select id="prev-hw" name="prev_hw" class="form-select" required>
+                  <option value="">Choose...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select an option.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="curr-hw" class="form-label"><%=t('studentFeedback.currHomework')%></label>
+              <select id="curr-hw" name="curr_hw" class="form-select" required>
+                  <option value="">Choose...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select an option.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="feedback" class="form-label"><%=t('studentFeedback.additionalFeedback')%></label>
+              <textarea id="feedback" name="additional_feedback" class="form-control" rows="4" placeholder="Write your feedback here..." required></textarea>
+              <div class="invalid-feedback">
+                Please provide your feedback.
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit"><%=t('studentFeedback.submitBtn')%></button>
+        </form>
+    </div>
+
+    <script>
+        function removeTopic(button) {
+            const container = document.getElementById('topicsContainer');
+            container.removeChild(button.parentElement);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

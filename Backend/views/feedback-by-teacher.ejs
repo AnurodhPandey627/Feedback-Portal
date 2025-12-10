@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('includes/head') %>
+  <meta charset="UTF-8">
+  <title><%=t('teacherFeedback.title')%></title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 10px;
+      color: black;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    input[type="time"] {
+      width: 150px;
+    }
+    input[type="number"] {
+      width: 100px;
+    }
+    .topics-section {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px dashed #ccc;
+      border-radius: 4px;
+    }
+    .topic-input {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .topic-input input {
+      flex: 1;
+    }
+    .add-topic {
+      background: none;
+      border: none;
+      color: #28a745;
+      font-size: 24px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .remove-topic {
+      background: none;
+      border: none;
+      color: #dc3545;
+      font-size: 20px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .btn-submit {
+      margin-top: 20px;
+      padding: 12px;
+      background: #007bff;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-submit:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <%- include("./includes/flash.ejs") %>
+  <div class="container">
+    <h2><%=t('teacherFeedback.title')%></h2>
+    <form id="feedbackForm" method="POST" action="/teacher/feedback" class="needs-validation" novalidate>
+
+      <input type="hidden" name="TID" value="<%=TID%>">
+      <input type="hidden" name="SUBID" value="<%=SUBID%>">
+      <input type="hidden" name="DAY" value="<%=DAY%>">
+      <input type="hidden" name="P_NO" value="<%=P_NO%>">
+
+      <div class="form-item mb-3">
+        <label for="startTime" class="form-label"><%=t('teacherFeedback.classStartTime')%></label>
+        <input type="time" id="startTime" name="class_start_time" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide valid class start time
+        </div>
+      </div>
+      
+      <div class="form-item mb-3">
+        <label for="endTime" class="form-label"><%=t('teacherFeedback.classEndTime')%></label>
+        <input type="time" id="endTime" name="class_end_time" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide valid class end time
+        </div>
+      </div>
+      
+      <div class="form-item mb-3">
+        <label for="numStudents" class="form-label"><%=t('teacherFeedback.presentStudents')%></label>
+        <input type="number" id="numStudents" name="present_students" min="1" class="form-control" required>
+        <div class="invalid-feedback">
+          Please provide valid number of present students
+        </div>
+      </div>
+      
+      <div class="form-item mb-3">
+        <label for="topicsTaught" class="form-label" ><%=t('teacherFeedback.topicsTaught')%></label>
+        <div id="topicsContainer" class="topics-section">
+          <div class="topic-input">
+            <input type="text" name="topics[]" placeholder=<%=t('teacherFeedback.enterTopic')%> class="form-control" required>
+            <button type="button" class="add-topic" onclick="addTopic()">&plus;</button>
+          </div>
+        </div>
+        <div class="invalid-feedback">
+          Please provide valid topic(s)
+        </div>
+      </div>
+      
+        <label for="classFeedback" class="form-label" ><%=t('teacherFeedback.additionalFeedback')%></label>
+        <textarea id="classFeedback" name="additional_feedback" rows="4" placeholder="Any additional comments..."></textarea>
+      
+      <div class="form-item mb-3">
+        <label for="rating" class="form-label"><%=t('teacherFeedback.overallExperience')%></label>
+        <select id="rating" name="rating" class="form-select" required>
+          <option value="" selected disabled>--Select Rating--</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid rating
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn-submit"><%=t('teacherFeedback.submitBtn')%></button>
+    </form>
+  </div>
+  
+  <script>
+    function addTopic() {
+      const container = document.getElementById('topicsContainer');
+      const div = document.createElement('div');
+      div.className = 'topic-input';
+      
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'topics[]';
+      input.placeholder = 'Enter topic';
+      input.required = true;
+      
+      // Plus button to add another topic
+      const addButton = document.createElement('button');
+      addButton.type = 'button';
+      addButton.className = 'add-topic';
+      addButton.innerHTML = '&plus;';
+      addButton.onclick = addTopic;
+      
+      // Remove button to delete this topic input
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'remove-topic';
+      removeButton.innerHTML = '&minus;';
+      removeButton.onclick = function() {
+        container.removeChild(div);
+      };
+      
+      div.appendChild(input);
+      div.appendChild(addButton);
+      div.appendChild(removeButton);
+      container.appendChild(div);
+    }
+    
+    
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
