@@ -104,6 +104,17 @@ const connection2 = mysql.createPool({
   queueLimit: 0,
 });
 
+//-----NEW TEMPORARY ROUTE FOR FETCHING STUDENTS' ATTENDANCE------------
+app.get("/fetch-attendance",async (req,res)=>{
+  //fetching present students list from the db, temporarily
+      let q2 = `SELECT DISTINCT student_roll_no FROM student_attendance_logs
+                      WHERE DATE(recognized_at) = CURDATE()`;
+      const [result2] = await connection2.query(q2);
+      //console.log(result2); //result is an array
+      const presents = new Set(result2.map((a) => a.student_roll_no));
+      res.render("attendance.ejs",{presents});
+});
+
 app.listen(port, () => {
   console.log(`listening to port ${port}`);
 });
@@ -991,14 +1002,8 @@ app.get(
       next(new ExpressError(404, "Teacher Not Found"));
     } else {
       //successfull login
-      //fetching present students list from the db, temporarily
-      let q2 = `SELECT student_roll_no FROM student_attendance_logs
-                      WHERE DATE(recognized_at) = CURDATE()`;
-      const [result2] = await connection2.query(q2);
-      console.log(result2); //result is an array
-      const presents = new Set(result2.map((a) => a.student_roll_no));
       req.flash("successs", "Login Successfull!");
-      res.render("teacher-dashboard.ejs", { teacher, presents });
+      res.render("teacher-dashboard.ejs", { teacher});
     }
   }),
 );
